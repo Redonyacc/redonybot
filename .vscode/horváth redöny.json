@@ -1,0 +1,348 @@
+const path = require('path');
+const cors = require('cors');
+
+const app = express();
+const PORT = 3000;
+
+app.use(cors());
+app.use(express.json());
+
+// --------------------------------------------------
+// ALAP SZABÁLYOK
+// --------------------------------------------------
+
+const VAT = 0.27;
+
+// --------------------------------------------------
+// TERMÉKEK
+// --------------------------------------------------
+
+const products = {
+  fa_redony: {
+    name: 'Fa redőny',
+    type: 'm2',
+    price: 72000
+  },
+
+  alu_redony: {
+    name: 'Alumínium redőny',
+    type: 'm2',
+    price: 34000
+  },
+
+  alu_redony_szunyoghalo: {
+    name: 'Alumínium redőny + szúnyogháló',
+    type: 'm2',
+    price: 43000
+  },
+
+  vakolhato_redony: {
+    name: 'Vakolható tokos redőny',
+    type: 'm2',
+    price: 35000
+  },
+
+  fa_tok: {
+    name: 'Fa dekli / Fa tok',
+    type: 'fm',
+    price: 59000
+  },
+
+  mobil_szunyoghalo: {
+    name: 'Mobil szúnyogháló',
+    type: 'm2',
+    price: 21000
+  },
+
+  fix_szunyoghalo: {
+    name: 'Fix keretes szúnyogháló',
+    type: 'm2',
+    price: 12000
+  },
+
+  plisze_szunyoghalo: {
+    name: 'Pliszé szúnyogháló',
+    type: 'm2',
+    price: 49500
+  }
+};
+
+// --------------------------------------------------
+// MOTOROK
+// --------------------------------------------------
+
+const motors = {
+  smart: {
+    name: 'SMART rádiós motor',
+    price: 50000
+  },
+
+  somfy: {
+    name: 'SOMFY rádiós motor',
+    price: 85000
+  }
+};
+
+// --------------------------------------------------
+// VEZÉRLÉS
+// --------------------------------------------------
+
+const controllers = {
+  smart_single: {
+    name: 'SMART egycsatornás',
+    price: 6000
+  },
+
+  smart_multi: {
+    name: 'SMART többcsatornás',
+    price: 28000
+  },
+
+  somfy_single: {
+    name: 'SOMFY egycsatornás',
+    price: 18000
+  },
+
+  somfy_multi: {
+    name: 'SOMFY többcsatornás',
+    price: 30000
+  }
+};
+
+// --------------------------------------------------
+// EGYÉB KÖLTSÉGEK
+// --------------------------------------------------
+
+const extras = {
+  sin: {
+    name: 'Megvezető sín',
+    type: 'fm',
+    price: 6500
+  },
+
+  kitamaszto: {
+    name: 'Kitámasztó kézi',
+    type: 'db',
+    price: 49000
+  },
+
+  szerkezet_csere: {
+    name: 'Tokban tartó szerkezet csere',
+    type: 'db',
+    price: 20000
+  },
+
+  bontas: {
+    name: 'Régi szerkezet bontás + elszállítás',
+    type: 'db',
+    price: 10000
+  },
+
+  kezeles_beepites: {
+    name: 'Kézi kezelésű beépítés',
+    type: 'db',
+    price: 15000
+  },
+
+  motoros_beepites: {
+    name: 'Motoros beépítés',
+    type: 'db',
+    price: 20000
+  }
+};
+
+// --------------------------------------------------
+// SEGÉDFÜGGVÉNYEK
+// --------------------------------------------------
+
+function calculateM2(width, height, price) {
+  const m2 = (width * height) / 10000;
+
+  return {
+    unit: Number(m2.toFixed(2)),
+    total: Math.round(m2 * price)
+  };
+}
+
+function calculateFM(width, height, depth, price) {
+  const fm = (width + height + depth) / 100;
+
+  return {
+    unit: Number(fm.toFixed(2)),
+    total: Math.round(fm * price)
+  };
+}
+
+function calculateDB(db, price) {
+  return {
+    unit: db,
+    total: db * price
+  };
+}
+
+function formatPrice(value) {
+  return value.toLocaleString('hu-HU') + ' Ft';
+}
+
+// --------------------------------------------------
+// MENÜ
+// --------------------------------------------------
+
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Üdvözlöm a Horváth Redőnynél!',
+
+    menu: [
+      'Fa redőny',
+      'Alumínium redőny',
+      'Fa tok / dekli',
+      'Szúnyogháló',
+      'Motorok',
+      'Vezérlés',
+      'Egyéb költségek'
+    ]
+  });
+});
+
+// --------------------------------------------------
+// ÁRKALKULÁCIÓ
+// --------------------------------------------------
+
+app.post('/calculate', (req, res) => {
+  try {
+    const {
+      product,
+      width,
+      height,
+      depth,
+      db,
+      motor,
+      controller,
+      gross
+    } = req.body;
+
+    const selectedProduct = products[product];
+
+    if (!selectedProduct) {
+      return res.status(400).json({
+        error: 'Ismeretlen termék'
+      });
+    }
+
+    let result = 0;
+    let unitData = 0;
+
+    // M2
+    if (selectedProduct.type === 'm2') {
+      if (!width || !height) {
+        return res.status(400).json({
+          error: 'Hiányzó szélesség vagy magasság'
+        });
+      }
+
+      const calc = calculateM2(
+        Number(width),
+        Number(height),
+        selectedProduct.price
+      );
+
+      result += calc.total;
+      unitData = calc.unit;
+    }
+
+    // FM
+    if (selectedProduct.type === 'fm') {
+      if (!width || !height || !depth) {
+        return res.status(400).json({
+          error: 'Hiányzó méretek'
+        });
+      }
+
+      const calc = calculateFM(
+        Number(width),
+        Number(height),
+        Number(depth),
+        selectedProduct.price
+      );
+
+      result += calc.total;
+      unitData = calc.unit;
+    }
+
+    // DB
+    if (selectedProduct.type === 'db') {
+      const calc = calculateDB(Number(db || 1), selectedProduct.price);
+
+      result += calc.total;
+      unitData = calc.unit;
+    }
+
+    // MOTOR
+    if (motor && motors[motor]) {
+      result += motors[motor].price;
+    }
+
+    // VEZÉRLÉS
+    if (controller && controllers[controller]) {
+      result += controllers[controller].price;
+    }
+
+    const net = result;
+    const vat = Math.round(result * VAT);
+    const grossPrice = Math.round(result * (1 + VAT));
+
+    res.json({
+      product: selectedProduct.name,
+
+      unit_type: selectedProduct.type,
+      unit_value: unitData,
+
+      net_price: formatPrice(net),
+      vat_price: formatPrice(vat),
+      gross_price: formatPrice(grossPrice),
+
+      selected_motor: motor ? motors[motor]?.name : null,
+      selected_controller: controller
+        ? controllers[controller]?.name
+        : null,
+
+      final_price: gross
+        ? formatPrice(grossPrice)
+        : formatPrice(net)
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: 'Szerver hiba'
+    });
+  }
+});
+
+// --------------------------------------------------
+// LISTÁZÁS
+// --------------------------------------------------
+
+app.get('/products', (req, res) => {
+  res.json(products);
+});
+
+app.get('/motors', (req, res) => {
+  res.json(motors);
+});
+
+app.get('/controllers', (req, res) => {
+  res.json(controllers);
+});
+
+app.get('/extras', (req, res) => {
+  res.json(extras);
+});
+
+// --------------------------------------------------
+// INDÍTÁS
+// --------------------------------------------------
+
+app.listen(PORT, () => {
+  console.log(`Szerver fut: http://localhost:${PORT}`);
+});

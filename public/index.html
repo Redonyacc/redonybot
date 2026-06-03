@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="kalkulator.css">
+
+  <title>Horváth Redőny Kalkulátor</title>
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <h1>Üdvözöljük a Horváth Redőnynél!</h1>
+      <p>
+        Menüvezérelt árkalkulátor redőny, fa tok, szúnyogháló, motor, vezérlés és egyéb költségek számításához.
+        Minden méret centiméterben értendő. Az árak nettó árak, az ÁFA 27%.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Főmenü</h2>
+      <div class="menu">
+        <button onclick="selectProduct('fa_redony')">Fa redőny</button>
+        <button onclick="selectProduct('alu_redony')">Alumínium redőny</button>
+        <button onclick="selectProduct('alu_redony_szunyoghalo')">Alumínium + szúnyogháló</button>
+        <button onclick="selectProduct('vakolhato_redony')">Vakolható tokos</button>
+        <button onclick="selectProduct('fa_tok')">Fa dekli / Fa tok</button>
+        <button onclick="selectProduct('mobil_szunyoghalo')">Mobil szúnyogháló</button>
+        <button onclick="selectProduct('fix_szunyoghalo')">Fix szúnyogháló</button>
+        <button onclick="selectProduct('oldalhuzos_szunyoghalo')">Oldalhúzós szúnyogháló</button>
+        <button onclick="selectProduct('plisze_szunyoghalo')">Pliszé szúnyogháló</button>
+      </div>
+    </div>
+
+    <div class="card" id="calculatorCard">
+      <h2>Árkalkuláció</h2>
+
+      <label>Kiválasztott termék</label>
+      <select id="product">
+        <option value="fa_redony">Fa redőny</option>
+        <option value="alu_redony">Alumínium redőny</option>
+        <option value="alu_redony_szunyoghalo">Alumínium redőny + szúnyogháló</option>
+        <option value="vakolhato_redony">Vakolható tokos alumínium redőny</option>
+        <option value="fa_tok">Fa dekli / Fa tok</option>
+        <option value="mobil_szunyoghalo">Mobil rendszerű szúnyogháló</option>
+        <option value="fix_szunyoghalo">Fix keretes szúnyogháló</option>
+        <option value="oldalhuzos_szunyoghalo">Oldal / dupla oldalhúzós szúnyogháló ajtó</option>
+        <option value="plisze_szunyoghalo">Pliszé rendszerű szúnyogháló ajtó</option>
+      </select>
+
+      <div class="row">
+        <div>
+          <label>Szélesség cm</label>
+          <input id="width" type="number" placeholder="pl. 100" />
+        </div>
+
+        <div>
+          <label>Magasság cm</label>
+          <input id="height" type="number" placeholder="pl. 200" />
+        </div>
+
+        <div id="depthBox" class="hidden">
+          <label>Mélység cm</label>
+          <input id="depth" type="number" placeholder="pl. 30" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Motor</label>
+          <select id="motor">
+            <option value="">Nincs motor</option>
+            <option value="smart">SMART rádiós motor</option>
+            <option value="somfy">SOMFY rádiós motor</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Vezérlés</label>
+          <select id="controller">
+            <option value="">Nincs vezérlés</option>
+            <option value="smart_single">SMART egycsatornás</option>
+            <option value="smart_multi">SMART többcsatornás</option>
+            <option value="somfy_single">SOMFY egycsatornás</option>
+            <option value="somfy_multi">SOMFY többcsatornás</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Ár megjelenítés</label>
+          <select id="gross">
+            <option value="false">Nettó</option>
+            <option value="true">Bruttó</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Egyéb költség</label>
+          <select id="extra">
+            <option value="">Nincs egyéb költség</option>
+            <option value="sin">Megvezető sín</option>
+            <option value="kitamaszto">Kitámasztó kézi</option>
+            <option value="szerkezet_csere">Tokban tartó szerkezet csere</option>
+            <option value="bontas">Régi szerkezet bontás + elszállítás</option>
+            <option value="kezeles_beepites">Új redőny beépítés kézi kezeléssel</option>
+            <option value="motoros_beepites">Motoros redőny beépítése</option>
+            <option value="bevesos_automata">Bevésős automata eloxált fedlap + belső rugó</option>
+            <option value="szunyoghalo_szereles">Szúnyogháló szerelés</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Egyéb költség mennyiség</label>
+          <input id="extraAmount" type="number" placeholder="db vagy fm" />
+        </div>
+      </div>
+
+      <p class="small">
+        Fa tok esetén a folyóméter számítása: (szélesség + magasság + mélység) / 100.
+        M2 alapú termékeknél: szélesség × magasság / 10000.
+      </p>
+
+      <button onclick="calculate()">Ár számolása</button>
+      <button class="secondary" onclick="resetForm()">Törlés</button>
+
+      <div id="output"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
