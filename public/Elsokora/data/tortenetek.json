@@ -1,0 +1,26 @@
+[
+  {
+    "nev": "orion – A Csillagok Őrzője",
+    "frakcio": "Universum",
+    "kep": "orion.jpg",
+    "tortenet": "A csillagok között is hallja Lyra hangját. Orion története a tiltott szerelemről, áldozatról és a visszatérés reményéről szól."
+  },
+  {
+    "nev": "Lyra – Az Üresség Csillaga",
+    "frakcio": "Universum",
+    "kep": "Lyra.jpg",
+    "tortenet": "Lyra az üresség peremén született fény. Ha Orion elesik, a sorsuk összekapcsolódik, és a csatatér többé nem ugyanaz."
+  },
+  {
+    "nev": "Vaerion – A Megtört Szárny",
+    "frakcio": "Black Hole",
+    "kep": "Vaerion.jpg",
+    "tortenet": "Egykor talán az Universum fényeihez tartozott, de a fekete lyuk hatalma átírta a létezését. Megtört, de nem elpusztult."
+  },
+  {
+    "nev": "Morvek – Az Elátkozott",
+    "frakcio": "Black Hole",
+    "kep": "Morvek.jpg",
+    "tortenet": "Egykor ember volt..."
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "cim": "1v1 – Párbaj",
+    "leiras": "Két játékos egymás ellen harcol. A cél az ellenfél karaktereinek legyőzése.",
+    "pontok": [
+      "Gyorsabb, tisztább játékmenet.",
+      "Könnyebb tesztelni a karakterek erejét.",
+      "Fontos a kezdés, a dobás és a passzív képesség időzítése."
+    ]
+  },
+  {
+    "cim": "2v2 – Csapatharc",
+    "leiras": "Két csapat küzd egymás ellen. Itt a szövetséges buffok, aurák és védelmi mechanikák nagyobb szerepet kapnak.",
+    "pontok": [
+      "A szövetséges karakterek egymást erősíthetik.",
+      "A királyi aurák és frakciókombók kiemelt szerepet kapnak.",
+      "Az iker hatás külön szabályt kap, hogy létrejöhessen a kötelék."
+    ]
+  },
+  {
+    "cim": "FFA – Mindenki mindenki ellen",
+    "leiras": "Több játékos játszik egyszerre, biztos szövetségek nélkül. Bárki bárkit támadhat, ezért a túlélés és a jó időzítés különösen fontos.",
+    "pontok": [
+      "A legerősebb játékos közös célponttá válhat.",
+      "A kivárás sokszor jobb, mint az azonnali támadás.",
+      "Az ideiglenes együttműködés is taktikai eszköz lehet."
+    ]
+  },
+  {
+    "cim": "Buff rendszer",
+    "leiras": "A buffok olyan előnyök, amelyek ideiglenesen vagy tartósan módosítják a karakterek teljesítményét.",
+    "pontok": [
+      "+HP",
+      "+DMG",
+      "Sebzéscsökkentés",
+      "Dobásmódosítás",
+      "Passzív erősítés",
+      "Körhöz kötött hatás"
+    ]
+  },
+  {
+    "cim": "Iker hatás",
+    "leiras": "Bizonyos karakterek párban erősebbek. Ha az ikerpár mindkét tagja játékba kerül, aktiválódik egy extra kötelékhatás.",
+    "pontok": [
+      "2v2-ben és FFA-ban, ha két játékos ugyanazt az ikret hozná be, az egyik cserélhet a párjára.",
+      "A cél, hogy létrejöhessen a kötelék.",
+      "Az ikerpár együtt extra taktikai mélységet ad."
+    ]
+  },
+  {
+    "cim": "Paraszt rendszer",
+    "leiras": "A paraszt karakterek feláldozható egységek. Nem feltétlenül a nyers erejük miatt fontosak, hanem azért, mert haláluk után hatást hagynak a játékban. Plusz felhúzható új egység is érkezhet.",
+    "pontok": [
+      "Steel paraszt: következő saját egység +100 HP.",
+      "Fire paraszt: következő saját egység +50 DMG 2 körig.",
+      "Leaf paraszt: az ellenfél dobása csökkenhet.",
+      "Universum paraszt: a következő saját minimum sebzés nőhet.",
+      "Black Hole imp: a következő ellenfél −100 HP-t kaphat.",
+      "Wind patkány: bünteti az ellenfél nagyobb dobását."
+    ]
+  }
+]
