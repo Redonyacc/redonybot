@@ -1,0 +1,269 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0b0d12;
+  --panel: #141821;
+  --panel2: #1a2030;
+  --text: #f2f0ea;
+  --muted: #aab1bf;
+  --gold: #d4af37;
+  --line: #353b49;
+  --danger: #8f2d2d;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top, #20283b 0%, #0b0d12 45%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.topbar {
+  padding: 22px clamp(18px, 4vw, 52px);
+  border-bottom: 1px solid var(--line);
+  background: rgba(8, 10, 15, .92);
+}
+
+.topbar h1 {
+  margin: 8px 0 4px;
+  color: var(--gold);
+}
+
+.topbar p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.back {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.game-shell {
+  width: min(1500px, 94%);
+  margin: 28px auto 60px;
+}
+
+.panel {
+  background: linear-gradient(180deg, rgba(28,34,48,.96), rgba(18,22,30,.96));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 12px 35px rgba(0,0,0,.2);
+}
+
+.setup-grid,
+.battle-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.team-selects {
+  display: grid;
+  gap: 9px;
+}
+
+select, button {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #10151f;
+  color: var(--text);
+  font-size: 15px;
+}
+
+button {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.13);
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.primary {
+  background: #6e5716;
+  border-color: var(--gold);
+}
+
+.danger {
+  background: var(--danger);
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.battle-area {
+  grid-template-columns: 1fr 340px 1fr;
+  margin-top: 20px;
+}
+
+.player-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.player-head select {
+  max-width: 58%;
+}
+
+.fighter-card {
+  min-height: 330px;
+  border: 1px solid #4b5263;
+  border-radius: 14px;
+  padding: 18px;
+  background: var(--panel2);
+}
+
+.fighter-card h3 {
+  color: var(--gold);
+  margin-top: 0;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.stat {
+  background: #10151f;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.stat span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.stat strong {
+  font-size: 22px;
+  color: var(--gold);
+}
+
+.hpbar {
+  height: 16px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #303645;
+  margin: 8px 0 3px;
+}
+
+.hpfill {
+  height: 100%;
+  background: linear-gradient(90deg, #7e2525, #d14b4b);
+}
+
+.center {
+  text-align: center;
+}
+
+.round-box strong {
+  display: block;
+  font-size: 56px;
+  color: var(--gold);
+}
+
+.round-box small {
+  color: var(--muted);
+}
+
+.dice-box {
+  margin: 22px 0;
+  display: grid;
+  gap: 12px;
+}
+
+.dice-row {
+  display: grid;
+  grid-template-columns: 1fr 60px;
+  gap: 10px;
+  align-items: center;
+}
+
+.dice-row strong {
+  font-size: 30px;
+  color: var(--gold);
+}
+
+.combat-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.rule-note {
+  margin-top: 18px;
+  padding: 12px;
+  border: 1px dashed #596174;
+  border-radius: 10px;
+  color: var(--muted);
+}
+
+.log-panel {
+  margin-top: 20px;
+}
+
+.log {
+  white-space: pre-line;
+  line-height: 1.55;
+  max-height: 260px;
+  overflow-y: auto;
+  color: #d7dbe4;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.dead {
+  color: #ff7777;
+  font-weight: 700;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .battle-area,
+  .setup-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .center {
+    order: -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .actions,
+  .player-head {
+    flex-direction: column;
+  }
+
+  .player-head select {
+    max-width: none;
+  }
+}

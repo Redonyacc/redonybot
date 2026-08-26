@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Az Elsők Kora – Playtest</title>
+  <link rel="stylesheet" href="playtest.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="back" href="index.html">← Vissza a főoldalra</a>
+    <div>
+      <h1>Az Elsők Kora – Playtest</h1>
+      <p>1v1 harci prototípus • D6 • MIN/MAX DMG • HP</p>
+    </div>
+  </header>
+
+  <main class="game-shell">
+    <section class="setup panel">
+      <h2>Csapatok összeállítása</h2>
+      <p class="muted">Mindkét játékos legfeljebb 6 karaktert választhat. Ugyanaz a karakter egy csapatban csak egyszer szerepelhet.</p>
+
+      <div class="setup-grid">
+        <div>
+          <h3>Játékos 1</h3>
+          <div id="team1-selects" class="team-selects"></div>
+        </div>
+        <div>
+          <h3>Játékos 2</h3>
+          <div id="team2-selects" class="team-selects"></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="start-game" class="primary">Játék indítása</button>
+        <button id="reset-game">Teljes visszaállítás</button>
+      </div>
+    </section>
+
+    <section id="battle-area" class="battle-area hidden">
+      <div class="player panel">
+        <div class="player-head">
+          <h2>Játékos 1</h2>
+          <select id="active1"></select>
+        </div>
+        <div id="card1" class="fighter-card"></div>
+      </div>
+
+      <section class="center panel">
+        <div class="round-box">
+          <span>Kör</span>
+          <strong id="round">1</strong>
+          <small id="round-type">Páratlan kör</small>
+        </div>
+
+        <div class="dice-box">
+          <div class="dice-row">
+            <button id="roll1">🎲 Játékos 1 dob</button>
+            <strong id="dice1">–</strong>
+          </div>
+          <div class="dice-row">
+            <button id="roll2">🎲 Játékos 2 dob</button>
+            <strong id="dice2">–</strong>
+          </div>
+        </div>
+
+        <div class="combat-actions">
+          <button id="attack1" class="danger" disabled>Játékos 1 támad</button>
+          <button id="attack2" class="danger" disabled>Játékos 2 támad</button>
+          <button id="next-round">Következő kör</button>
+        </div>
+
+        <div class="rule-note">
+          <strong>Alapszabály:</strong>
+          páratlan dobás = MIN DMG, páros dobás = MAX DMG.
+        </div>
+      </section>
+
+      <div class="player panel">
+        <div class="player-head">
+          <h2>Játékos 2</h2>
+          <select id="active2"></select>
+        </div>
+        <div id="card2" class="fighter-card"></div>
+      </div>
+    </section>
+
+    <section class="panel log-panel">
+      <h2>Harci napló</h2>
+      <div id="log" class="log">A játék még nem indult el.</div>
+    </section>
+  </main>
+
+  <script src="characters.js"></script>
+  <script src="playtest.js"></script>
+</body>
+</html>
