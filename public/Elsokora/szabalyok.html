@@ -1,1 +1,43 @@
-<!DOCTYPE html><html lang="hu"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Az Elsők Kora – Szabályok</title><link rel="stylesheet" href="style.css" /></head><body><nav class="topnav"><a class="brand" href="index.html">Az Elsők Kora</a><button class="menu-toggle" aria-label="Menü">☰</button><div class="nav-links"><a href="index.html">Főoldal</a><a href="szabalyok.html">Szabályok</a><a href="tortenetek.html">Karakter történetek</a><a href="termekeink.html">Termékeink</a><a href="kapcsolat.html">Kapcsolat</a></div></nav><main class="page"><section class="section page-head"><p class="eyebrow">Játékrendszer</p><h1>Szabályok</h1><p>Itt találod az alap játékmódokat és a fő mechanikákat.</p></section><section class="section"><div id="rulesList" class="accordion-list"></div></section></main><footer><p>Az Elsők Kora © 2026 – készítette Gulyás Tamás</p></footer><script src="script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Az Elsők Kora dobókockás alapjátékának szabályai: felállás, kihívás, PvP, passzív képességek és gyógyulás." />
+  <title>Játékszabályok – Az Elsők Kora</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="social-navigation.css" />
+</head>
+<body>
+  <header class="hero rules-hero">
+    <nav class="topnav" aria-label="Fő navigáció">
+      <a class="brand" href="index.html">Az Elsők Kora</a>
+      <div class="nav-links">
+        <a href="index.html">Főoldal</a>
+        <a href="index.html#modes">Játékmódok</a>
+        <a href="index.html#factions">Frakciók</a>
+        <a href="szabalyok.html" aria-current="page">Játékszabályok</a>
+        <a href="/Elsokora/playtest.html">Playtest</a>
+        <span class="social-links" aria-label="Közösségi oldalak">
+          <a href="https://www.facebook.com/profile.php?id=61591159672455" target="_blank" rel="noopener noreferrer" aria-label="Elsők Kora a Facebookon" title="Facebook"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/></svg></a>
+          <a href="https://www.youtube.com/@Els%C3%B6kkora" target="_blank" rel="noopener noreferrer" aria-label="Elsők Kora a YouTube-on" title="YouTube"><svg viewBox="0 0 24 24" width="26" height="24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
+        </span>
+      </div>
+    </nav>
+    <div class="hero-content"><p class="eyebrow">Alapjáték • D6 • Hatkarakteres csapat</p><h1>Játékszabályok</h1><p class="subtitle">Az Elsők Kora dobókockás alapjátékának szabályai, a csapatösszeállítástól a párbajokig.</p><a class="btn" href="#rule-1">Szabályok olvasása</a></div>
+  </header>
+  <main class="rules-main">
+    <section class="section intro" id="rule-1"><p class="eyebrow">01 • Felállás</p><h2>Csapatösszeállítás</h2><p>Minden játékos <strong>6 karakterből álló csapattal</strong> vesz részt a játékban. A csapat összeállításánál számítanak a karakterek szerepei, képességei és egymásra ható passzívjai.</p></section>
+    <section class="section" id="rule-2"><p class="eyebrow">02 • Felkészülés</p><h2>Karakterek felállítása és cseréje</h2><p>A játékosok felváltva helyezik el karaktereiket: minden lerakásra az ellenfél egy saját karakter lerakásával válaszol.</p><p>A játék kezdetén mindkét fél <strong>egy karaktert lecserélhet</strong>. A paraszt halálát követően a játékos <strong>bármilyen karakterét felhozhatja</strong> a csatatérre.</p></section>
+    <section class="section" id="rule-3"><p class="eyebrow">03 • Kezdés</p><h2>Kihívás és a PvP kezdése</h2><ol><li>Mindkét játékos dob egy hatoldalú dobókockával (D6).</li><li>A nagyobbat dobó játékos kapja az első kihívás jogát, és ellenfelet választ.</li><li>A kihívható célpontot passzív képességek módosíthatják.</li><li>A kihívás után újra dobnak: a nagyobbat dobó kezdi a PvP-harcot.</li></ol></section>
+    <section class="section" id="rule-4"><p class="eyebrow">04 • Harc</p><h2>A dobókockás sebzés</h2><div class="grid two"><article class="panel"><h3>Páratlan dobás (1, 3, 5)</h3><p><strong>Maximális sebzés (MAX DMG)</strong></p></article><article class="panel"><h3>Páros dobás (2, 4, 6)</h3><p><strong>Minimális sebzés (MIN DMG)</strong></p></article></div><p>A passzív képességek megváltoztathatják a dobások értékét, a sebzést vagy a harc menetét.</p></section>
+    <section class="section" id="rule-5"><p class="eyebrow">05 • Képességek</p><h2>Passzív képességek</h2><p>A passzív képességek módosíthatják a HP-t, a sebzést, a dobásokat, a kihívást és a körök eseményeit. A passzívok <strong>egymással is kölcsönhatásba léphetnek</strong>: módosíthatják vagy kiolthatják egymás hatását.</p></section>
+    <section class="section" id="rule-6"><p class="eyebrow">06 • Párbaj után</p><h2>A győztes karakter szabálya</h2><div class="panel large"><ul><li>A párbaj győztese a csatatéren marad.</li><li>Győzelem után azonnal <strong>+100 HP</strong>-t gyógyul.</li><li>A következő harc végéig <strong>nem hívható ki</strong>.</li><li>A következő harc után további <strong>+100 HP</strong>-t gyógyul.</li><li>Passzívok és buffok nélkül a két gyógyulás együtt legfeljebb <strong>200 HP</strong>. Más passzív képességek módosíthatják ezt.</li></ul><p><strong>Kivétel: ha paraszt sebezte le.</strong></p></div></section>
+    <section class="section" id="rule-7"><p class="eyebrow">07 • Uralkodó</p><h2>A király szerepe</h2><p>A király <strong>bármikor megtámadható</strong>. Amíg legalább egy szövetségese életben van, a király passzív képessége aktív marad. Ha egyedül marad a csatatéren, <strong>minden passzív képessége teljesen megszűnik</strong>; onnantól az alapértékei és a dobásai érvényesülnek.</p></section>
+    <section class="section" id="rule-8"><p class="eyebrow">08 • Nyilvántartás</p><h2>Körök és hatások követése</h2><p>A játékosoknak a saját és az ellenfél aktív passzív képességeit, hátralévő köreit, dobásait, dobásmódosításait, HP-ját és sebzésmódosításait is nyomon kell követniük.</p></section>
+    <section class="section" id="rule-9"><p class="eyebrow">09 • Kiegészítők</p><h2>Buffkártyák</h2><p>A buffkártyák használatát <strong>a csata megkezdése előtt jelezni kell</strong>, hogy mindkét fél tudjon az alkalmazásukról.</p></section>
+    <section class="section"><p class="eyebrow">Későbbi bővítés</p><h2>Board 90</h2><p>A Board 90 az Elsők Kora folytatása, külön PvP-játékmódként. Saját szabályrendszere elkülönül a hagyományos, dobókockás alapjátéktól.</p><p><a class="btn" href="index.html">Vissza a főoldalra</a></p></section>
+  </main>
+  <footer><p>Az Elsők Kora © 2026 – készítette Gulyás Tamás</p></footer>
+</body>
+</html>
