@@ -1,22 +1,25 @@
 <!doctype html>
 <html lang="hu">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Elsők Kora – fantasy kártyák keresése" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Az Elsők Kora – kártyakereső, Universum, Black Hole és Leaf frakciókkal">
   <title>Lapkereső | Az Elsők Kora</title>
   <style>
     :root{color-scheme:dark;--bg:#0e1119;--panel:#171d29;--line:#343d51;--gold:#e3c686;--muted:#aab5c8;--ink:#f7f4eb}
     *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#202a3b,#0e1119 65%);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
     header{background:#0a0e15d9;border-bottom:1px solid var(--line);padding:18px max(20px,calc((100vw - 1200px)/2));display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-    header strong{font-family:Georgia,serif;color:var(--gold);font-size:24px}a{color:var(--gold)}
-    main{max-width:1240px;margin:0 auto;padding:34px 20px 70px}h1{margin:0;font:700 clamp(29px,4vw,46px)/1.15 Georgia,serif;color:var(--gold)}.lead{color:var(--muted);margin:10px 0 24px}
+    header strong{font-family:Georgia,serif;color:var(--gold);font-size:24px}a{color:var(--gold)}main{max-width:1240px;margin:0 auto;padding:34px 20px 70px}
+    h1{margin:0;font:700 clamp(29px,4vw,46px)/1.15 Georgia,serif;color:var(--gold)}.lead{color:var(--muted);margin:10px 0 24px}
     .filters{display:flex;flex-wrap:wrap;gap:12px;background:var(--panel);border:1px solid var(--line);padding:18px;border-radius:15px;margin-bottom:20px}
     label{display:block;font-size:13px;color:var(--muted);font-weight:650;margin-bottom:5px}.field{flex:1 1 250px}.field.small{flex:0 1 230px}
     input,select{width:100%;padding:12px 13px;border-radius:9px;background:#0e1420;border:1px solid #566175;color:var(--ink);font:inherit}input:focus,select:focus{outline:2px solid var(--gold);outline-offset:1px}
-    .result{color:var(--muted);margin:18px 0}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:18px}.card{margin:0;padding:10px;background:var(--panel);border:1px solid var(--line);border-radius:13px;min-width:0}
-    .card button{display:block;width:100%;border:0;padding:0;background:transparent;cursor:zoom-in}.card img{display:block;width:100%;height:auto;aspect-ratio:1166/1678;object-fit:contain;border-radius:7px;background:#080c13}.card figcaption{text-align:center;font-weight:650;padding:10px 0 3px}
-    .empty{padding:25px;border:1px dashed var(--line);color:var(--muted);border-radius:12px}
+    .result{color:var(--muted);margin:18px 0}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:18px}
+    .card{margin:0;padding:10px;background:var(--panel);border:1px solid var(--line);border-radius:13px;min-width:0}
+    .card button{display:block;width:100%;border:0;padding:0;background:transparent;cursor:zoom-in}.card img{display:block;width:100%;height:auto;aspect-ratio:1166/1678;object-fit:contain;border-radius:7px;background:#080c13}
+    .card figcaption{text-align:center;font-weight:650;padding:10px 0 3px;overflow-wrap:anywhere}.card .faction{text-align:center;color:var(--muted);font-size:12px;margin:0 0 5px}
+    .empty,.warning{padding:16px;border:1px dashed var(--line);color:var(--muted);border-radius:12px}.warning{border-color:#98763b;color:#f0d59a;margin:14px 0;display:none}
+    .warning.visible{display:block}.warning button{margin-left:8px;padding:5px 10px;border-radius:7px;background:#293246;color:white;border:1px solid #758095;cursor:pointer}
     dialog{max-width:min(94vw,750px);max-height:96vh;background:#10141d;border:1px solid #596176;color:var(--ink);border-radius:12px;padding:13px}dialog::backdrop{background:#000c;backdrop-filter:blur(3px)}
     .dialogTop{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:8px}.dialogTop strong{color:var(--gold);font-size:18px}#largeCard{display:block;max-width:100%;max-height:82vh;margin:auto;object-fit:contain}.close{border:1px solid #758095;background:#293246;color:white;border-radius:8px;padding:7px 13px;cursor:pointer}
     .note{margin-top:28px;color:var(--muted);font-size:13px}@media(max-width:480px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.card{padding:6px}.card figcaption{font-size:13px}main{padding:24px 12px}}
@@ -29,19 +32,35 @@
     <p class="lead">Fedezd fel a karaktereket! Keress név vagy frakció szerint, majd kattints a kártyára a nagyításhoz.</p>
     <section class="filters" aria-label="Keresési szűrők">
       <div class="field"><label for="query">Karakter neve</label><input id="query" type="search" placeholder="Például: Aurelyn, Orion…" autocomplete="off"></div>
-      <div class="field small"><label for="faction">Frakció</label><select id="faction"><option value="all">Összes frakció</option><option value="universum">Universum</option><option value="blackhole">Black Hole (hamarosan)</option><option value="fire">Fire (hamarosan)</option><option value="leaf">Leaf (hamarosan)</option><option value="steel">Steel (hamarosan)</option><option value="wind">Wind (hamarosan)</option></select></div>
+      <div class="field small"><label for="faction">Frakció</label><select id="faction">
+        <option value="all">Összes frakció</option><option value="universum">Universum</option><option value="blackhole">Black Hole</option><option value="leaf">Leaf</option>
+        <option value="fire" disabled>Fire (hamarosan)</option><option value="steel" disabled>Steel (hamarosan)</option><option value="wind" disabled>Wind (hamarosan)</option>
+      </select></div>
     </section>
-    <p class="result" id="result" aria-live="polite"></p>
+    <p class="result" id="result" aria-live="polite">Kártyák beolvasása…</p>
+    <div id="warning" class="warning" role="status"><span id="warningText"></span><button id="retry" type="button">Újrapróbálás</button></div>
     <section id="cards" class="grid" aria-label="Kártyák"></section>
-    <p class="note">A kártyák webes előnézetként jelennek meg. A további frakciók később kerülnek a keresőbe.</p>
+    <p class="note">Webes előnézet. A három frakció képfájlneveit a nyilvános GitHub-tárhelyről olvassuk be. A lapkereső nem változtat a kártyafájlokon.</p>
   </main>
   <dialog id="viewer" aria-label="Kártyanagyítás"><div class="dialogTop"><strong id="largeName"></strong><button class="close" id="close" type="button">Bezárás ✕</button></div><img id="largeCard" alt=""></dialog>
   <script>
     'use strict';
-    // A fájl helye: public/Elsokora/lapkereso.html
-    // A kártyák helye: public/images/cards/universum/
-    const names = ['Aetherion','Aethyra','Aster','Asteria','Asterion','Atlas','Aurelyn','Chronel','Elysar','Eonara','Kaelis','Lyra','Nymira','Orion','Valthera','Xerion'];
-    const cards = names.map(name => ({name, faction:'universum', image:`../images/cards/universum/${name}.png`}));
+    // Jelenlegi (képernyőképen igazolt) képútvonalak:
+    // public/images/cards/universum/
+    // public/blackhole/
+    // public/leaf/
+    // Ez az oldal: public/Elsokora/lapkereso.html
+    // FIGYELEM: a GitHub API nyilvános hozzáférésétől függ a dinamikus betöltés.
+    const GITHUB_OWNER = 'Redonyacc';
+    const GITHUB_REPO = 'redonybot';
+    const folders = [
+      {faction:'universum', label:'Universum', path:'public/images/cards/universum'},
+      {faction:'blackhole', label:'Black Hole', path:'public/blackhole'},
+      {faction:'leaf', label:'Leaf', path:'public/leaf'}
+    ];
+    // Universum tartaléklista: GitHub API-hiba esetén is megjelenhet a már tesztelt 16 kártya.
+    const universumNames = ['Aetherion','Aethyra','Aster','Asteria','Asterion','Atlas','Aurelyn','Chronel','Elysar','Eonara','Kaelis','Lyra','Nymira','Orion','Valthera','Xerion'];
+    let cards = [];
     const search = document.querySelector('#query');
     const faction = document.querySelector('#faction');
     const list = document.querySelector('#cards');
@@ -49,26 +68,66 @@
     const viewer = document.querySelector('#viewer');
     const large = document.querySelector('#largeCard');
     const largeName = document.querySelector('#largeName');
+    const warning = document.querySelector('#warning');
+    const warningText = document.querySelector('#warningText');
     document.querySelector('#close').addEventListener('click', () => viewer.close());
-    viewer.addEventListener('click', event => { if(event.target === viewer) viewer.close(); });
+    viewer.addEventListener('click', event => {if(event.target===viewer) viewer.close();});
+    const imagePattern = /\.(png|jpe?g|webp|gif)$/i;
+    function displayName(filename){return filename.replace(imagePattern,'').replace(/[_-]+/g,' ').trim();}
+    function imageUrl(folder, filename){return '/' + folder.path.replace(/^public\//,'') + '/' + encodeURIComponent(filename);}
+    async function loadFolder(folder){
+      const url=`https://api.github.com/repos/${encodeURIComponent(GITHUB_OWNER)}/${encodeURIComponent(GITHUB_REPO)}/contents/${folder.path}?ref=main`;
+      const response=await fetch(url,{headers:{'Accept':'application/vnd.github+json'},cache:'no-store'});
+      if(!response.ok) throw new Error(`${folder.label}: GitHub ${response.status}`);
+      const files=await response.json();
+      if(!Array.isArray(files)) throw new Error(`${folder.label}: nem mappalista érkezett`);
+      return files.filter(file=>file.type==='file' && imagePattern.test(file.name))
+        .map(file=>({name:displayName(file.name),faction:folder.faction,label:folder.label,image:imageUrl(folder,file.name)}));
+    }
+    async function loadCards(){
+      warning.classList.remove('visible');
+      result.textContent='Kártyák beolvasása…';
+      const outcomes=await Promise.allSettled(folders.map(loadFolder));
+      const failed=[];
+      const collected=[];
+      outcomes.forEach((outcome,index)=>{
+        if(outcome.status==='fulfilled') collected.push(...outcome.value);
+        else {
+          failed.push(folders[index].label);
+          if(folders[index].faction==='universum'){
+            collected.push(...universumNames.map(name=>({name,faction:'universum',label:'Universum',image:imageUrl(folders[index],name+'.png')})));
+          }
+        }
+      });
+      cards=collected.sort((a,b)=>a.name.localeCompare(b.name,'hu'));
+      if(failed.length){
+        warningText.textContent='Nem sikerült minden frakciót beolvasni ('+failed.join(', ')+'). A GitHub API átmenetileg nem elérhető vagy elérte a lekérdezési korlátot.';
+        warning.classList.add('visible');
+      }
+      render();
+    }
     function render(){
-      const query = search.value.trim().toLocaleLowerCase('hu');
-      const selected = faction.value;
-      const matches = cards.filter(c => (selected === 'all' || c.faction === selected) && c.name.toLocaleLowerCase('hu').includes(query));
-      result.textContent = `${matches.length} találat`;
+      const query=search.value.trim().toLocaleLowerCase('hu');
+      const selected=faction.value;
+      const matches=cards.filter(c=>(selected==='all'||c.faction===selected)&&c.name.toLocaleLowerCase('hu').includes(query));
+      result.textContent=`${matches.length} találat`;
       list.replaceChildren();
       if(matches.length===0){const message=document.createElement('p');message.className='empty';message.textContent='Nincs találat. Próbálj más nevet vagy frakciót!';list.append(message);return;}
       for(const card of matches){
         const figure=document.createElement('figure');figure.className='card';
         const button=document.createElement('button');button.type='button';button.setAttribute('aria-label',`${card.name} kártya nagyítása`);
-        const img=document.createElement('img');img.src=card.image;img.alt=`${card.name} – Universum kártya`;img.loading='lazy';img.decoding='async';
+        const img=document.createElement('img');img.src=card.image;img.alt=`${card.name} – ${card.label} kártya`;img.loading='lazy';img.decoding='async';
         img.onerror=()=>{img.alt=`${card.name} – a képfájl nem tölthető be`;};
         const caption=document.createElement('figcaption');caption.textContent=card.name;
-        button.append(img);figure.append(button,caption);list.append(figure);
-        button.addEventListener('click',()=>{large.src=card.image;large.alt=img.alt;largeName.textContent=card.name;viewer.showModal();});
+        const sub=document.createElement('p');sub.className='faction';sub.textContent=card.label;
+        button.append(img);figure.append(button,caption,sub);list.append(figure);
+        button.addEventListener('click',()=>{large.src=card.image;large.alt=img.alt;largeName.textContent=card.name+' – '+card.label;viewer.showModal();});
       }
     }
-    search.addEventListener('input',render);faction.addEventListener('change',render);render();
+    search.addEventListener('input',render);
+    faction.addEventListener('change',render);
+    document.querySelector('#retry').addEventListener('click',loadCards);
+    loadCards();
   </script>
 </body>
 </html>
