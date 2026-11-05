@@ -8,7 +8,19 @@
 
 /* Playmat V3: ugyanaz az eredeti grafika mindkét játékosnak. */
 .mats{grid-template-columns:1fr;}
-.mat-board{position:relative;aspect-ratio:16/9;background:#07080c var(--playmat-url, url('/images/playmat/playmat.png')) center / contain no-repeat;border:1px solid #806625;border-radius:8px;overflow:hidden;margin:12px 0 16px;}
+.mat-board {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background-color: #07080c;
+  background-image: url("/images/playmat/playmat.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 1px solid #806625;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 12px 0 16px;
+}
 .boardSlot{position:absolute;top:40%;width:13%;height:39%;padding:0;border:1px solid transparent;border-radius:6px;background:rgba(22,17,15,.10);display:grid;place-items:center;color:#e1c269;overflow:hidden;}
 .boardSlot:hover,.boardSlot:focus-visible{border:2px solid #edc856;background:rgba(12,11,15,.5);}
 .boardSlot span{font-size:28px;text-shadow:0 0 8px black;display:flex;flex-direction:column;align-items:center;}
