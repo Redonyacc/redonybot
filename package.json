@@ -1,9 +1,12 @@
 {
-  "name": "redonybot",
+  "name": "az-elsok-kora",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "node scripts/build-site.js",
+    "prestart": "npm run build",
+    "test": "node --test tests/migration.test.js"
   },
   "dependencies": {
     "cors": "^2.8.6",
